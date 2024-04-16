@@ -61,35 +61,42 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChange }) => {
         )}
       </button>
 
-      <span
-        className={`ml-2 ${
-          isValidPassword ? "text-green-500" : "text-red-500"
-        }`}
-      >
-        Password must contain at least
-      </span>
-      <div
-        className={`ml-2 ${
-          isValidPassword.letter ? "text-green-500" : "text-red-500"
-        }`}
-      >
-        {isValidPassword.letter ? "✔ 1 letter" : "✖ 1 letter"}
+      <span className="ml-2">Password must contain at least</span>
+      <div className="mt-2">
+        <span
+          className={`ml-2 ${
+            isValidPassword.letter ? "text-[#A5DD9B]" : "text-red-500"
+          }`}
+        >
+          {isValidPassword.letter ? "✔ " : "✖ "}
+        </span>
+        <span className={`ml-2 ${!isValidPassword.letter && "text-red-500"}`}>
+          1 letter
+        </span>
       </div>
-      <div
-        className={`ml-2 ${
-          isValidPassword.number ? "text-green-500" : "text-red-500"
-        }`}
-      >
-        {isValidPassword.number
-          ? "✔ 1 number or special character (# ? ! &)"
-          : "✖ 1 number or special character (# ? ! &)"}
+      <div className="mt-1">
+        <span
+          className={`ml-2 ${
+            isValidPassword.number ? "text-[#A5DD9B]" : "text-red-500"
+          }`}
+        >
+          {isValidPassword.number ? "✔ " : "✖ "}
+        </span>
+        <span className={`ml-2 ${!isValidPassword.letter && "text-red-500"}`}>
+          1 number or special character (# ? ! &)
+        </span>
       </div>
-      <div
-        className={`ml-2 ${
-          isValidPassword.length ? "text-green-500" : "text-red-500"
-        }`}
-      >
-        {isValidPassword.length ? "✔ 10 characters" : "✖ 10 characters"}
+      <div className="mt-1">
+        <span
+          className={`ml-2 ${
+            isValidPassword.length ? "text-[#A5DD9B]" : "text-red-500"
+          }`}
+        >
+          {isValidPassword.length ? "✔ " : "✖ "}
+        </span>
+        <span className={`ml-2 ${!isValidPassword.letter && "text-red-500"}`}>
+          10 characters
+        </span>
       </div>
     </div>
   );
