@@ -10,7 +10,6 @@ function Signup() {
   const [signupData, setSignupData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +40,7 @@ function Signup() {
           onSubmit={handleLoginSubmit}
         >
           <h2 className="text-3xl font-bold mb-8">SignUp</h2>
+
           <div className="mb-8">
             <label
               className="block text-gray-400 text-sm font-bold mb-2"
@@ -58,39 +58,27 @@ function Signup() {
               onChange={handleLoginChange}
             />
           </div>
-          <div className="mb-8">
-            <label
-              className="block text-gray-400 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Password
-            </label>
-            <PasswordInput
-              value={loginData.password}
-              onChange={(value) =>
-                setLoginData({ ...loginData, password: value })
-              }
-            />
-          </div>
+
           <div className="flex items-center justify-between">
-            <button
-              className="bg-[#FF9292] hover:bg-[#FFB4B4] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Sign In
-            </button>
+            <Link href="signup/step1">
+              <button
+                className="bg-[#FF9292] hover:bg-[#FFB4B4] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+              >
+                Next
+              </button>
+            </Link>
           </div>
           <div className="mt-4">
-            New to <span className="font-bold">Claxroom</span>?{" "}
+            Already have an account?{" "}
             <div className="relative inline-block">
               <Link
-                href="/signup"
+                href="/login"
                 className="text-[#FF9292] transition-colors duration-300 border-b-2 border-transparent hover:border-[#FF9292]"
               >
-                Log In
+                Log in here.
               </Link>
-            </div>{" "}
-            instead
+            </div>
           </div>
         </form>
       </div>
