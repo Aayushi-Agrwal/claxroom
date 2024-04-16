@@ -1,17 +1,21 @@
 "use client";
 
+import Button from "@/app/components/Button";
 import PasswordInput from "@/app/components/PasswordButton";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import { useState } from "react";
 
 function Step1() {
   const [password, setPassword] = useState("");
   return (
     <div className="w-1/4 h-1/2">
-      <h1 className="text-2xl text-stone-400 absolute left-1/3 mt-1 ml-4">
-        <FontAwesomeIcon icon={faChevronLeft} />
-      </h1>
+      <Link href="/signup">
+        <h1 className="text-2xl text-stone-400 absolute left-1/3 mt-1 ml-4">
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </h1>
+      </Link>
       <div className="flex items-center">
         <div>
           <p className="text-sm text-stone-400">Step 1 of 3</p>
@@ -30,6 +34,9 @@ function Step1() {
           onChange={(value) => setPassword(value)}
         />
       </div>
+      <Link href="step2">
+        <Button name="Next" />
+      </Link>
     </div>
   );
 }
