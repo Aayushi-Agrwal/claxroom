@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/app/components/Button";
+import Button, { ButtonDisabled } from "@/app/components/Button";
 import PasswordInput from "@/app/components/PasswordButton";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +9,7 @@ import { useState } from "react";
 
 function Step1() {
   const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(true);
   return (
     <div className="w-1/4 h-1/2">
       <Link href="/signup">
@@ -32,11 +33,16 @@ function Step1() {
         <PasswordInput
           value={password}
           onChange={(value) => setPassword(value)}
+          setDisabled={setDisabled}
         />
       </div>
-      <Link href="step2">
-        <Button name="Next" />
-      </Link>
+      {disabled ? (
+        <ButtonDisabled name="Next" />
+      ) : (
+        <Link href="step2">
+          <Button name="Next" />
+        </Link>
+      )}
     </div>
   );
 }

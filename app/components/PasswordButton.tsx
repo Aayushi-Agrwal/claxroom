@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface PasswordInputProps {
   value: string;
   onChange: (value: string) => void;
+  setDisabled: (disabled: boolean) => void;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChange }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  value,
+  onChange,
+  setDisabled,
+}) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState({
     letter: false,
@@ -31,6 +36,17 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ value, onChange }) => {
     return password.length >= 10;
   };
 
+  useEffect(() => {
+    if (
+      isValidPassword.length &&
+      isValidPassword.letter &&
+      isValidPassword.number
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [value]);
   const handlePasswordChange = (newValue: string) => {
     onChange(newValue);
     setIsValidPassword({
