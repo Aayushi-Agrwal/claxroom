@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Signup() {
   const [signupData, setSignupData] = useState({
@@ -12,18 +14,34 @@ function Signup() {
     password: "",
   });
 
+  const [errorMessage, setErrorMessage] = useState<boolean>(false);
+  const router = useRouter();
+
+  function isValidEmail(email: string) {
+    // Define a regular expression pattern for email validation.
+    const pattern =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return pattern.test(email);
+  }
+
   const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage(false);
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
   };
 
   const handleSignupSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log("Signup Data:", signupData);
-    router.push("signup/step1");
-    // Add your signup logic here
+    if (isValidEmail(signupData.email)) {
+      setErrorMessage(false);
+      console.log(signupData.email);
+      console.log("Signup Data:", signupData);
+      router.push("signup/step1");
+    } else {
+      console.log("error");
+      setErrorMessage(true);
+    }
   };
-  const router = useRouter();
+
   return (
     <div className="flex items-center">
       <div className="w-1/2 mr-8">
@@ -41,13 +59,21 @@ function Signup() {
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
-                type="email"
+                // type="email"
                 placeholder="Email"
                 name="email"
                 value={signupData.email}
                 onChange={handleSignupChange}
-                required
+                // required
               />
+
+              {errorMessage && (
+                <div className="mt-6 text-sm text-red-500 flex gap-2 items-center">
+                  <FontAwesomeIcon icon={faCircleExclamation} />
+                  This email is invalid. Make sure it's written like
+                  example@email.com
+                </div>
+              )}
             </div>
 
             <div className="flex items-center justify-between">
@@ -60,7 +86,7 @@ function Signup() {
             </div>
           </form>
 
-          <div className="mt-4">
+          <div className="mt-6">
             Already have an account?{" "}
             <div className="relative inline-block">
               <Link
