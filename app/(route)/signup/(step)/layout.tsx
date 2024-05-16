@@ -19,13 +19,11 @@ export default function RootLayout({
     }
   }
   return (
-    <html lang="en">
-      <body>
-        <div className="flex flex-col justify-center items-center h-screen w-screen">
-          <LineProgress progress={progress()} />
-          {children}
-        </div>
-      </body>
-    </html>
+    <section>
+      <div className="flex flex-col justify-center items-center h-screen w-screen">
+        <LineProgress progress={progress()} />
+        {children}
+      </div>
+    </section>
   );
 }
