@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 interface PasswordInputProps {
   value: string;
   onChange: (value: string) => void;
-  setDisabled: (disabled: boolean) => void;
+  // setDisabled: (disabled: boolean) => void;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
   value,
   onChange,
-  setDisabled,
+  // setDisabled,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState({
@@ -42,9 +42,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
       isValidPassword.letter &&
       isValidPassword.number
     ) {
-      setDisabled(false);
+      // setDisabled(false);
     } else {
-      setDisabled(true);
+      // setDisabled(true);
     }
   }, [value]);
   const handlePasswordChange = (newValue: string) => {

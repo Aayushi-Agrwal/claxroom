@@ -34,7 +34,7 @@ function Signup() {
 
   return (
     <div className="flex items-center">
-      <div className="w-1/2">
+      <div className="w-1/2 mr-8">
         <form
           className="shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-8"
           onSubmit={handleLoginSubmit}
