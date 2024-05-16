@@ -1,6 +1,6 @@
 "use client";
 
-import PasswordInput from "@/app/components/PasswordButton";
+// import PasswordInput from "@/app/components/PasswordButton";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,9 +9,9 @@ import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Signup() {
-  const [signupData, setSignupData] = useState({
-    email: "",
-    password: "",
+  const [signupEmail, setSignupEmail] = useState<string>(() => {
+    const storedEmail = localStorage.getItem("signupEmail");
+    return storedEmail ? JSON.parse(storedEmail) : "";
   });
 
   const [errorMessage, setErrorMessage] = useState<boolean>(false);
@@ -26,15 +26,16 @@ function Signup() {
 
   const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrorMessage(false);
-    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+    setSignupEmail(e.target.value);
   };
 
   const handleSignupSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isValidEmail(signupData.email)) {
+    if (signupEmail && isValidEmail(signupEmail)) {
       setErrorMessage(false);
-      console.log(signupData.email);
-      console.log("Signup Data:", signupData);
+      console.log(signupEmail);
+      localStorage.setItem("signupEmail", JSON.stringify(signupEmail));
+      console.log("Signup Data:", signupEmail);
       router.push("signup/step1");
     } else {
       console.log("error");
@@ -62,7 +63,7 @@ function Signup() {
                 // type="email"
                 placeholder="Email"
                 name="email"
-                value={signupData.email}
+                value={signupEmail}
                 onChange={handleSignupChange}
                 // required
               />
